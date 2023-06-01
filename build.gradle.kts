@@ -49,6 +49,12 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "ar.edu.unq.agiletutor.AgiletutorApplication"
+    }
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
