@@ -16,10 +16,6 @@ group = "ar.edu.unq"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-springBoot {
-    mainClass.set("ar.edu.unq.agiletutor.AgiletutorApplicationkt")
-}
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -50,9 +46,21 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Jar> {
+    // Otherwise you'll get a "No main manifest attribute" error
     manifest {
         attributes["Main-Class"] = "ar.edu.unq.agiletutor.AgiletutorApplicationKt"
     }
+
+    // To avoid the duplicate handling strategy error
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // To add all of the dependencies
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }
 
 tasks.withType<Test> {
