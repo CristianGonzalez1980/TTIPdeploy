@@ -17,7 +17,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 springBoot {
-    mainClass.set("ar.edu.unq.agiletutor.AgiletutorApplication.kt")
+    mainClass.set("ar.edu.unq.agiletutor.AgiletutorApplicationkt")
 }
 
 repositories {
@@ -51,7 +51,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "ar.edu.unq.agiletutor.AgiletutorApplication"
+        attributes["Main-Class"] = "ar.edu.unq.agiletutor.AgiletutorApplicationKt"
     }
 }
 
